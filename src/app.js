@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/auth');
+const raffleRoutes = require('./routes/raffle');
+const purchaseRoutes = require('./routes/purchase');
 
 const app = express();
 app.use(bodyParser.json());
@@ -14,14 +16,14 @@ sequelize.sync()
         console.error('Erro ao sincronizar os modelos com o banco de dados:', err);
     });
 
-// Rotas de autenticação
+// Rotas da aplicação
 app.use('/auth', authRoutes);
-
-app.get('/', (req, res) => {
-    res.send('API de Rifas está rodando!');
-});
+app.use('/raffle', raffleRoutes);
+app.use('/purchase', purchaseRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
 });
+
+

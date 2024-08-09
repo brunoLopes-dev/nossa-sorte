@@ -7,16 +7,14 @@ const AuthController = {
         const { name, email, cpf, birthdate, phone_number, password } = req.body;
 
         try {
-            // Verificar se o usuário já existe
+
             const userExists = await User.findOne({ where: { email } });
             if (userExists) {
                 return res.status(400).json({ message: 'Usuário já existe' });
             }
 
-            // Criptografar a senha
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            // Criar novo usuário
             const newUser = await User.create({
                 name,
                 email,
