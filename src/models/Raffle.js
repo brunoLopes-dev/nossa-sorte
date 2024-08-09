@@ -2,26 +2,25 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Raffle = sequelize.define('Raffle', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  draw_date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    }
 }, {
-  timestamps: true,
-  tableName: 'Raffles'
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: false
 });
 
 module.exports = Raffle;
